@@ -223,64 +223,6 @@ def openn():
     #open('data1.xlsx')
     subprocess.run(['data1.xlsx'],shell=True)
 
-def views():
-    tv=ttkthemes.ThemedTk()
-    tv.get_themes()
-    tv.set_theme('itft1')
-
-    tv.geometry("1030x650+0+0")
-    tv.resizable(False,False)
-    tv.configure(bg='#ededed')
-    tv.title('View mode')
-
-    frames=Frame(tv)
-    frames.place(x=20,y=20,width=1000,height=620)
-
-    scrollbarx=Scrollbar(frames,orient=HORIZONTAL)
-    scrollbary=Scrollbar(frames,orient=VERTICAL)
-
-    mytree=ttk.Treeview(frames,xscrollcommand=scrollbarx.set,yscrollcommand=scrollbary.set)
-    mytree.place(x=0,y=0)
-
-    scrollbarx.config(command=mytree.xview)
-    scrollbary.config(command=mytree.yview)
-
-    scrollbarx.pack(side=BOTTOM,fill=X)
-    scrollbary.pack(side=RIGHT,fill=Y)
-    mytree.pack(fill=BOTH,expand=1)
-
-    myfile="data1.xlsx"
-    
-    df=pd.read_excel(myfile)
-
-    mytree.delete(*mytree.get_children())
-
-    mytree['column']=list(df.columns)
-    mytree['show']='headings'
-
-    for col in mytree['column']:
-        mytree.heading(col,text=col)
-
-    dfrows=df.to_numpy().tolist()
-    for rows in dfrows:
-        mytree.insert('','end',values=rows)
-
-    mytree.column('Sl no',width=50,anchor=CENTER)
-    mytree.column('Date',width=100,anchor=CENTER)
-    mytree.column('Time',width=100,anchor=CENTER)
-    mytree.column('Shift',width=80,anchor=CENTER)
-    mytree.column('Course',width=200,anchor=CENTER)
-    mytree.column('Name',width=150,anchor=CENTER)
-    mytree.column('Ref.no.',width=150,anchor=CENTER)
-    mytree.column('Application no.',width=150,anchor=CENTER)
-    mytree.column('Phone Number',width=150,anchor=CENTER)
-    mytree.column('Alternate Number',width=150,anchor=CENTER)
-    mytree.column('Aadhar Number',width=150,anchor=CENTER)
-    mytree.column('Remarks',width=200,anchor=CENTER)
-    mytree.column('Reminder Date',width=120,anchor=CENTER)
-
-
-
 
 
 
@@ -526,11 +468,7 @@ sbm_btn.grid(row=6,column=2,sticky='w')
 clr_btn=ttk.Button(root,text="Clear Entry",style="success.TButton",command=clrs)
 clr_btn.grid(row=1,column=5,sticky='w')
 
-#=============================================
-#img2=PhotoImage(file='viewbtn.png')
-#view_btn=Button(root,image=img2,bd=0,bg='#ededed',cursor='hand2',activebackground='#ededed',command=views)
-view_btn=ttk.Button(root,text="View list",style="success.TButton",command=views)
-view_btn.grid(row=2,column=5,sticky='w')
+
 
 #----------------------------------------------------
 img3=PhotoImage(file="Image/exitbt1.png")
